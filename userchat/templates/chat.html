@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container mt-5 col-6 mx-auto card p-3 shadow-sm " style="background-color: #c7c8c947">
+<h3>Chat with {{ receiver.username }}</h3>
+        <ul class="list-group list-group-flush mb-3">
+            {% for message in received_messages %}
+                <li class="list-group-item"> 
+                    {% if message.sender == request.user %}
+                    <span class="fw-bold"> 
+                        You ({{ request.user.username }}): 
+                    </span>
+                    {{ message.content }}
+                    {% else %}
+                    <span class="fw-bold text-primary"> 
+                        {{ message.sender.username }}:
+                    </span>
+                    {{ message.content }}
+                    {% endif %}
+                    {% if message.edited %}
+                    <small class="text-secondary">(edited)</small>
+                    {% endif %}
+                    {% if message.sender == request.user %}
+                    <span class="ms-2">  </span>
+                        <a  href="{% url 'edit_message' message.pk %}">Edit</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="content" id="content" placeholder="type message here.." aria-label="content" aria-describedby="button-addon2">
+            <button class="btn  btn-secondary" type="submit" id="button-addon2">Send</button>
+          </div>
+    </form>
+
+</div>
+{% endblock body %}

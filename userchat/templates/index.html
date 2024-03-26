@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="container mt-5 col-6 mx-auto card p-3 shadow-sm " style="background-color: #c7c8c947">
+<h1>Available Users</h1>
+    <ul class="list-group list-group-flush mb-3">
+        {% for user in allusers %}
+            <li class="list-group-item">Chat with <a href="{% url 'send_message' user.username %}"> {{ user.username }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+    {% endblock body %}
+    

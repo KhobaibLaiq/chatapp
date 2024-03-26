@@ -1,0 +1,44 @@
+{% extends "authenticate_base.html" %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <form class="col-6 mx-auto card p-3 shadow-lg" method="post" >
+          {%csrf_token%}   
+          <legend>Signup</legend>
+          {% if messages %}
+          {{message.tags}}
+          <div class="alert alert-primary" role="alert">
+            {% for message in messages %}
+             {{ message }} 
+            {% endfor %}
+          </div>
+          {% endif %}
+
+
+
+              <hr>
+              <div class="mb-3">
+                <label for="username" class="form-label"> Username</label>
+                <input type="text" name="username"  class="form-control" placeholder="enter username">
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label"> Email</label>
+                <input type="Email" name="email"  class="form-control" placeholder="enter email">
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label"> Password</label>
+                <input type="text" name="password"  class="form-control" placeholder="enter password">
+
+            </div>            
+              
+            <p>If Already have account, <a href="/login/">Login</a></p>
+
+              <button type="submit" class="btn btn-success">Register</button>
+          </form>
+
+    </div>
+
+
+
+    {% endblock body %}
